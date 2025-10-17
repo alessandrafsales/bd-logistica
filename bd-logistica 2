@@ -1,0 +1,14 @@
+CREATE DATABASE Logistica;
+CREATE TABLE Clientes (
+    CodigoDoCliente CHAR(10) NOT NULL,
+    NomeDaEmpresa VARCHAR(70) NOT NULL,
+    NomeDoContato VARCHAR(70) NOT NULL,
+    CargoDoContato VARCHAR(40) NOT NULL,
+    Endereco VARCHAR(50) NOT NULL,
+    Cidade VARCHAR(25) NOT NULL,
+    Regiao VARCHAR(25) NOT NULL,
+    CEP CHAR(15) NOT NULL,
+    Pais VARCHAR(25) NOT NULL,
+    Telefone CHAR(20) NOT NULL,
+    Fax CHAR(20) NOT NULL
+);
