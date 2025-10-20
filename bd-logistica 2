@@ -20,3 +20,88 @@ EXEC sp_rename Clientes,  TableClientes;
 
 ALTER TABLE TableClientes 
 ADD PRIMARY KEY(CodigoDoCliente);
+
+CREATE TABLE TableTransportadora (
+    CodigoDaTransportadora INT PRIMARY KEY,
+    NomeDaEmpresa VARCHAR(30) NOT NULL,
+    Telefone CHAR(20) NULL
+);
+
+CREATE TABLE TableCategoria (
+    CodigoDaCategoria INT PRIMARY KEY,
+    NomeDaCategoria VARCHAR(30) NOT NULL,
+    Descricao VARCHAR(100) NULL
+)
+
+CREATE TABLE TableDetalhesdoPedido (
+    NumeroDoPedido INT,
+    CodigoDoProduto INT,
+    PrecoUnitario MONEY NULL,
+    Quantidade INT NULL,
+    Desconto FLOAT NULL,
+    CONSTRAINT PK_TableDetalhesdoPedido PRIMARY KEY (NumeroDoPedido,CodigoDoProduto)
+)
+
+CREATE TABLE TableFornecedores (
+    CodigoDoFornecedor INT PRIMARY KEY,
+    NomeDaEmpresa VARCHAR(70) NOT NULL,
+    NomeDoContato VARCHAR(70) NOT NULL,
+    CargoDoContato VARCHAR(40) NULL,
+    Endereco VARCHAR(50) NULL,
+    Cidade VARCHAR(25) NULL,
+    Regiao VARCHAR(25) NULL,
+    CEP CHAR(15) NULL,
+    Pais VARCHAR(25) NULL,
+    Telefone CHAR(20) NULL,
+    Fax CHAR(20) NULL
+)
+
+CREATE TABLE TableFuncionarios (
+    CodigoDoFuncionario INT PRIMARY KEY,
+    Sobrenome VARCHAR(30) NULL,
+    Nome VARCHAR(30) NOT NULL,
+    Cargo VARCHAR(40) NULL,
+    Tratamento CHAR(10) NULL,
+    DataDeNascimento DATE NULL,
+    DataDeContratacao DATE NULL,
+    Endereco VARCHAR(50) NULL,
+    Cidade VARCHAR(25) NULL,
+    Regiao VARCHAR(25) NULL,
+    CEP CHAR(15) NULL,
+    Pais VARCHAR(25) NULL,
+    TelefoneResidencial CHAR(20) NULL,
+    Ramal CHAR(5) NULL,
+    Observacoes VARCHAR(200) NULL
+)
+
+CREATE TABLE TablePedidos (
+    NumeroDoPedido INT PRIMARY KEY,
+    CodigoDoCliente CHAR(10) NOT NULL,
+    CodigoDoFuncionario INT NOT NULL,
+    DataDoPedido DATE NULL,
+    DataDeEntrega DATE NULL,
+    DataDeEnvio DATE NULL,
+    CodigoDaTransportadora INT NOT NULL,
+    Frete MONEY NULL,
+    NomeDoDestinatario VARCHAR(50) NULL,
+    EnderecoDoDestinatario VARCHAR(50) NULL,
+    CepdeDestino CHAR(15) NULL,
+    PaisDeDestino VARCHAR(25) NULL,
+    CidadeDeDestino VARCHAR(25) NULL,
+    RegiaoDeDestino VARCHAR(25) NULL
+)
+
+CREATE TABLE TableProdutos (
+    CodigoDoProduto INT PRIMARY KEY,
+    NomeDoProduto VARCHAR(50) NOT NULL,
+    CodigoDoFornecedor INT NOT NULL,
+    CodigoDaCategoria INT NOT NULL,
+    QuantidadePorUnidade CHAR(30) NULL,
+    PrecoUnitario MONEY NULL,
+    UnidadesEmEstoque INT NULL,
+    UnidadesPedidas INT NULL,
+    NivelDeReposicao INT NULL,
+    Descontinuacao INT NULL
+)
+
+EXEC sp_rename TableCategoria,  TableCategorias;
