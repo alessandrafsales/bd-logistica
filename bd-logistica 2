@@ -1,4 +1,7 @@
 CREATE DATABASE Logistica;
+
+USE Logistica;
+
 CREATE TABLE Clientes (
     CodigoDoCliente CHAR(10) NOT NULL,
     NomeDaEmpresa VARCHAR(70) NOT NULL,
@@ -12,3 +15,8 @@ CREATE TABLE Clientes (
     Telefone CHAR(20) NOT NULL,
     Fax CHAR(20) NOT NULL
 );
+
+EXEC sp_rename Clientes,  TableClientes;
+
+ALTER TABLE TableClientes 
+ADD PRIMARY KEY(CodigoDoCliente);
