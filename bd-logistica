@@ -1,3 +1,4 @@
+-- Criação do Banco e tabelas
 CREATE DATABASE Logistica;
 
 USE Logistica;
@@ -105,3 +106,40 @@ CREATE TABLE TableProdutos (
 )
 
 EXEC sp_rename TableCategoria,  TableCategorias;
+
+-- Relacionamentos
+
+-- TablePedidos e TableClientes
+ALTER TABLE TablePedidos
+ADD CONSTRAINT FK_TablePedidos_TableClientes
+FOREIGN KEY (CodigoDoCliente) REFERENCES TableClientes(CodigoDoCliente);
+
+-- TablePedidos e TableFuncionarios
+ALTER TABLE TablePedidos
+ADD CONSTRAINT FK_TablePedidos_TableFuncionarios
+FOREIGN KEY (CodigoDoFuncionario) REFERENCES TableFuncionarios(CodigoDoFuncionario);
+
+-- TablePedidos e TableDetalhesdoPedido
+ALTER TABLE TableDetalhesdoPedido
+ADD CONSTRAINT FK_TableDetalhesdoPedido_TablePedidos
+FOREIGN KEY (NumeroDoPedido) REFERENCES TablePedidos(NumeroDoPedido);
+
+-- TableDetalhesdoPedido e TableProdutos
+ALTER TABLE TableDetalhesdoPedido
+ADD CONSTRAINT FK_TableDetalhesdoPedido_TableProdutos
+FOREIGN KEY (CodigoDoProduto) REFERENCES TableProdutos(CodigoDoProduto);
+
+-- TableProdutos e TableCategorias
+ALTER TABLE TableProdutos
+ADD CONSTRAINT FK_TableProdutos_TableCategorias
+FOREIGN KEY (CodigoDaCategoria) REFERENCES TableCategorias(CodigoDaCategoria);
+
+-- TableProdutos e TableFornecedores
+ALTER TABLE TableProdutos
+ADD CONSTRAINT FK_TableProdutos_TableFornecedores
+FOREIGN KEY (CodigoDoFornecedor) REFERENCES TableFornecedores(CodigoDoFornecedor);
+
+-- TablePedidos e TableTransportadora
+ALTER TABLE TablePedidos
+ADD CONSTRAINT FK_TablePedidos_TableTransportadora
+FOREIGN KEY (CodigoDaTransportadora) REFERENCES TableTransportadora(CodigoDaTransportadora);
